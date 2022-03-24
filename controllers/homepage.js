@@ -1,4 +1,7 @@
-module.exports = function homepageController(req, res) {
+const fs = require('fs/promises');
+
+module.exports = async function homepageController(req, res) {
   res.statusCode = 200;
-  res.end('Homepage');
+  const layout = await fs.readFile('./views/layout.html');
+  res.end(layout);
 };

@@ -6,12 +6,12 @@ const _404Controller = require('./controllers/_404');
 const homepageController = require('./controllers/homepage');
 
 function router(req, res) {
-  console.log(req.url);
+ 
   switch (true) {
-    case req.url.indexOf('/public') === 0: // static files
+    case req.url.indexOf('/public') === 0: //static files
       staticController(req, res);
       break;
-    case req.url === '/': //homepage
+    case req.url === '/': // homepage
       homepageController(req, res);
       break;
     default:

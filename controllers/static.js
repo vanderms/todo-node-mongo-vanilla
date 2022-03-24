@@ -1,17 +1,17 @@
-const fs = require('fs').promises;
+const fs = require('fs/promises');
 const getPath = require('../path');
+const _404Controller = require('./_404');
 
-module.exports = function staticController(req, res) {
+
+module.exports = async function staticController(req, res) {
   const path = getPath(req.url);
 
-  console.log(path);
-  fs.readFile(path)
-    .then((data) => {
-      res.statusCode = 200;
-      res.end(data);
-    })
-    .catch((err) => {
-      res.statusCode = 404;
-      res.end(JSON.stringify(err));
-    });
+  const file = await fs.readFile(path).catch(() => {});
+
+  if (file) {
+    res.statusCode = 200;
+    res.end(file);
+  } else {
+    _404Controller(req, res);
+  }
 };
