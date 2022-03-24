@@ -41,7 +41,7 @@ function router(req, res) {
 async function main() {
   const server = http.createServer(router);
   const port = process.env.PORT ?? 3000;
-  await DBClient.instance();
+  await DBClient.connect();
   server.listen(port, () => {
     console.log(`server running at http://localhost:${port}`);
   });
