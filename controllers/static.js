@@ -1,6 +1,6 @@
 const fs = require('fs/promises');
 const getPath = require('../path');
-const _404Controller = require('./_404');
+const _404 = require('./_404');
 
 
 module.exports = async function staticController(req, res) {
@@ -12,6 +12,6 @@ module.exports = async function staticController(req, res) {
     res.statusCode = 200;
     res.end(file);
   } else {
-    _404Controller(req, res);
+    _404(req, res);
   }
 };

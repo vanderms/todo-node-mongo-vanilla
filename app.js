@@ -2,21 +2,20 @@ const http = require('http');
 const dotenv = require('dotenv');
 const fs = require('fs').promises;
 const staticController = require('./controllers/static');
-const _404Controller = require('./controllers/_404');
+const _404 = require('./controllers/_404');
 const homepageController = require('./controllers/homepage');
 
 function router(req, res) {
  
   switch (true) {
-    case req.url.indexOf('/public') === 0: //static files
-      staticController(req, res);
-      break;
-    case req.url === '/': // homepage
-      homepageController(req, res);
-      break;
+    case req.url.indexOf('/public') === 0:
+      return staticController(req, res);
+      
+    case req.url === '/':
+      return homepageController(req, res);
+      
     default:
-      _404Controller(req, res);
-      break;
+      return _404(req, res);   
       
   }
 }
